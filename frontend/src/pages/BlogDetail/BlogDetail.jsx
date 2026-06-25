@@ -9,6 +9,8 @@ import { useAuth } from '../../context/AuthContext';
 import { formatDateTime, timeAgo } from '../../utils/helpers';
 import './BlogDetail.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8084/api';
+
 // Simple markdown renderer (basic)
 function renderContent(content) {
   if (!content) return '';
@@ -128,7 +130,7 @@ export default function BlogDetail() {
         // đảm bảo chỉ gọi API đúng 1 lần/bài/thiết bị dù có F5 bao nhiêu lần.
         postService.incrementView(data.id);
 
-        fetch(`http://localhost:8084/api/posts/${data.id}/history`)
+        fetch(`${API_BASE}/posts/${data.id}/history`)
           .then((r) => r.json())
           .then((hist) => setHistory(hist))
           .catch(() => setHistory([]));

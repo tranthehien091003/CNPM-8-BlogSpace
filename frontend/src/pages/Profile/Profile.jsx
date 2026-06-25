@@ -6,7 +6,7 @@ import { authService } from '../../services/authService';
 import toast from 'react-hot-toast';
 import './Profile.css';
 
-const API_BASE = 'http://localhost:8084';
+const API_BASE = (import.meta.env.VITE_API_BASE || 'http://localhost:8084/api').replace(/\/api$/, '');
 
 export default function Profile() {
   const { currentUser, updateProfile } = useAuth();

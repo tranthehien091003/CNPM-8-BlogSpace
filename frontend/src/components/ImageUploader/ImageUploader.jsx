@@ -3,6 +3,8 @@ import { FiUploadCloud, FiX, FiImage } from 'react-icons/fi';
 import { authService } from '../../services/authService';
 import './ImageUploader.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8084/api';
+
 /**
  * Component upload ảnh với tính năng:
  * - Kéo thả file vào vùng upload (drag & drop)
@@ -50,7 +52,7 @@ export default function ImageUploader({ value, onChange }) {
         headers['Authorization'] = `Bearer ${token}`;
       }
 
-      const res = await fetch('http://localhost:8084/api/media/upload', {
+      const res = await fetch(`${API_BASE}/media/upload`, {
         method: 'POST',
         headers: headers,
         body: formData,

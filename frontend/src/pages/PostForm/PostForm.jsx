@@ -8,6 +8,8 @@ import ImageUploader from '../../components/ImageUploader/ImageUploader';
 import toast from 'react-hot-toast';
 import './PostForm.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8084/api';
+
 export default function PostForm({ mode = 'create' }) {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -47,7 +49,7 @@ export default function PostForm({ mode = 'create' }) {
           setSlugManual(true);
 
           // Load lịch sử chỉnh sửa khi ở chế độ edit
-          fetch(`http://localhost:8084/api/posts/${id}/history`)
+          fetch(`${API_BASE}/posts/${id}/history`)
             .then(r => r.json())
             .then(setHistory)
             .catch(() => setHistory([]));
@@ -110,7 +112,7 @@ export default function PostForm({ mode = 'create' }) {
     setRollingBack(true);
     const toastId = toast.loading('Đang khôi phục...');
     try {
-      const res = await fetch(`http://localhost:8084/api/posts/${id}/rollback/${historyId}`, { method: 'POST' });
+      const res = await fetch(`${API_BASE}/posts/${id}/rollback/${historyId}`, { method: 'POST' });
       const data = await res.json();
       setForm(prev => ({
         ...prev,
@@ -120,7 +122,7 @@ export default function PostForm({ mode = 'create' }) {
         thumbnail: data.thumbnail,
       }));
       // Reload lịch sử mới
-      const histRes = await fetch(`http://localhost:8084/api/posts/${id}/history`);
+      const histRes = await fetch(`${API_BASE}/posts/${id}/history`);
       setHistory(await histRes.json());
       toast.success('Đã khôi phục phiên bản cũ!', { id: toastId });
     } catch {
