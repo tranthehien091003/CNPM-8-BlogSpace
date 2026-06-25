@@ -7,7 +7,7 @@
  * Chúng ta lưu token ở đây để mỗi lần tải lại trang, user không cần đăng nhập lại.
  */
 
-const API_BASE = 'http://localhost:8084/api/auth';
+const API_BASE = (import.meta.env.VITE_API_BASE || 'http://localhost:8084/api') + '/auth';
 const TOKEN_KEY = 'blogspace_token';
 const USER_KEY = 'blogspace_user';
 

@@ -1,7 +1,7 @@
 import { mockPosts } from '../data/mockPosts';
 import { authService } from './authService';
 
-const API_BASE = 'http://localhost:8084/api';
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8084/api';
 const USE_MOCK = false; // Đặt false khi backend sẵn sàng
 
 // In-memory store
