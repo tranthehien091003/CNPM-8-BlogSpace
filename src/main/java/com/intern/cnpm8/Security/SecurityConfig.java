@@ -80,7 +80,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173")); // Frontend URL
+        config.setAllowedOrigins(List.of(
+            "http://localhost:5173",
+            "https://cnpm-8-blog-space.vercel.app"
+        )); // Frontend URLs allowed
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*")); // Cho phép mọi header (bao gồm Authorization)
         config.setAllowCredentials(true);
